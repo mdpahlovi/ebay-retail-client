@@ -4,11 +4,16 @@ import Input from "../Components/Input";
 import Header from "../Components/Header";
 import { ImGoogle, ImGithub } from "react-icons/im";
 import { BsFacebook } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { setAuthAndToken } from "../Api/auth";
 
 const Signin = () => {
     const { signIn, signInByGoogle, signInByFacebook, signInByGithub } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const loaction = useLocation();
+    const from = loaction.state?.from?.pathname || "/";
 
     const handelSubmit = (event) => {
         // Get Form Data
@@ -19,8 +24,10 @@ const Signin = () => {
 
         signIn(email, password)
             .then((result) => {
+                setAuthAndToken(result.user);
                 toast.success("User Signin Completed");
                 form.reset();
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 const errorMessage = error.message;
@@ -38,21 +45,27 @@ const Signin = () => {
     const handelGoogleSignIn = () => {
         signInByGoogle()
             .then((result) => {
+                setAuthAndToken(result.user);
                 toast.success("Google Signin Done");
+                navigate(from, { replace: true });
             })
             .catch((error) => console.error(error));
     };
     const handelFacebookSignIn = () => {
         signInByFacebook()
             .then((result) => {
+                setAuthAndToken(result.user);
                 toast.success("Facebook Signin Done");
+                navigate(from, { replace: true });
             })
             .catch((error) => console.error(error));
     };
     const handelGithubSignIn = () => {
         signInByGithub()
             .then((result) => {
+                setAuthAndToken(result.user);
                 toast.success("Github Signin Done");
+                navigate(from, { replace: true });
             })
             .catch((error) => console.error(error));
     };
@@ -94,9 +107,9 @@ const Signin = () => {
                 </div>
                 <p className="text-center">
                     Don't have an account?
-                    <Link to="/signup" className="ml-1.5 font-bold uppercase underline">
+                    <button onClick={() => navigate("/signup", { state: from, replace: true })} className="ml-1.5 font-bold uppercase underline">
                         Sign Up Now
-                    </Link>
+                    </button>
                 </p>
             </section>
         </>

@@ -9,6 +9,7 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
+    updateProfile,
 } from "firebase/auth";
 import app from "../Config/firebase.config";
 
@@ -22,11 +23,20 @@ const UserContext = ({ children }) => {
     const facebookProvider = new FacebookAuthProvider();
     const githubProvider = new GithubAuthProvider();
 
+    // Create User & Update Profile
     const createUser = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     };
+    const updateUserProfile = (name, photo) => {
+        setLoading(true);
+        return updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: photo,
+        });
+    };
 
+    // Signin & Signin With Social
     const signIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
@@ -44,8 +54,10 @@ const UserContext = ({ children }) => {
         return signInWithPopup(auth, githubProvider);
     };
 
+    // Sign Out User & Remove JWT Token
     const signout = () => {
         setLoading(true);
+        localStorage.removeItem("assignment-12-token");
         return signOut(auth);
     };
 
@@ -67,7 +79,20 @@ const UserContext = ({ children }) => {
         }
     }, []);
 
-    const authInfo = { user, loading, createUser, signIn, signInByGoogle, signInByFacebook, signInByGithub, signout, theme, setTheme };
+    const authInfo = {
+        user,
+        loading,
+        setLoading,
+        createUser,
+        updateUserProfile,
+        signIn,
+        signInByGoogle,
+        signInByFacebook,
+        signInByGithub,
+        signout,
+        theme,
+        setTheme,
+    };
     return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };
 

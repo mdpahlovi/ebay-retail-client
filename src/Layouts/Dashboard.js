@@ -22,7 +22,7 @@ const Dashboard = () => {
                         <Link className="btn btn-ghost">Item 1</Link>
                         <Link className="btn btn-ghost">I have border</Link>
                         <Link className="btn btn-ghost">Item 3</Link>
-                        <Link to="/" className="btn">
+                        <Link to="/" className="btn hover:bg-base-content/95">
                             Back To Home
                         </Link>
                     </div>

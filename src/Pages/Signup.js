@@ -2,42 +2,67 @@ import React, { useContext } from "react";
 import { AuthContext } from "../Contexts/UserContext";
 import Input from "../Components/Input";
 import Header from "../Components/Header";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { setAuthAndToken } from "../Api/auth";
 
 const Signup = () => {
-    const { createUser } = useContext(AuthContext);
+    const { setLoading, createUser, updateUserProfile } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const loaction = useLocation();
+    const from = loaction.state || "/";
 
     const handelSubmit = (event) => {
         // Get Form Data
         event.preventDefault();
         const form = event.target;
         const name = `${form.fastName.value} ${form.lastName.value}`;
-        const img = form.img.value;
+        const img = form.img.files[0];
         const email = form.email.value;
         const password = form.password.value;
         const confirmPassword = form.confirmPass.value;
 
         // Check Password
-        if (password.length < 6) {
-            toast.error("Password must be 6 cherecter or more");
-            return;
-        }
         if (password !== confirmPassword) {
             toast.error("Your password didn't match");
             return;
         }
 
-        // Create New User
-        createUser(email, password)
-            .then((result) => {
-                const user = result.user;
-                user.displayName = name;
-                user.photoURL = img;
-                form.reset();
-                toast.success("Account Created");
+        // Update Img & Then Create User
+        const formData = new FormData();
+        formData.append("image", img);
+        fetch(`https://api.imgbb.com/1/upload?key=830547d2f0f205ab23f8516091510fb2`, {
+            method: "POST",
+            body: formData,
+        })
+            .then((res) => res.json())
+            .then((imageData) => {
+                createUser(email, password)
+                    .then((result) => {
+                        setAuthAndToken(result.user);
+                        updateUserProfile(name, imageData.data.display_url)
+                            .then(() => {
+                                toast.success("Created New User");
+                                setLoading(false);
+                                navigate(from, { replace: true });
+                            })
+                            .catch((error) => console.error(error));
+                    })
+                    .catch((error) => console.error(error));
             })
             .catch((error) => console.error(error));
+    };
+
+    // Check & Set image input fild style
+    const isImage = (event) => {
+        const input = event.target;
+        if (input.files.length !== 0) {
+            input.classList.add("file-input-primary");
+            input.classList.remove("border-base-content");
+        } else {
+            input.classList.remove("file-input-primary");
+        }
     };
 
     return (
@@ -49,6 +74,7 @@ const Signup = () => {
                         <Input type={"text"} name={"fastName"} text={"Fast Name"} />
                         <Input type={"text"} name={"lastName"} text={"Last Name"} />
                     </div>
+                    <input onChange={isImage} type="file" name="img" accept="image/*" className="file-input border-base-content w-full" />
                     <Input type={"email"} name={"email"} text={"Email"} />
                     <Input type={"password"} name={"password"} text={"Password"} />
                     <Input type={"password"} name={"confirmPass"} text={"Confirm Password"} />
