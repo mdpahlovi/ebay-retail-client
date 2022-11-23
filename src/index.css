@@ -6,4 +6,26 @@
     .my-container {
         @apply container mx-auto px-6;
     }
+    .form-container {
+        @apply max-w-md mx-auto px-6;
+    }
+    .section-gap {
+        @apply my-12 sm:my-14 lg:my-16;
+    }
+    .line-x {
+        @apply flex items-center before:flex-1 before:border before:border-base-content/50  after:flex-1 after:border after:border-base-content/50;
+    }
+    /* Input Field */
+    .input {
+        @apply focus:outline-none;
+    }
+    .input-field {
+        @apply w-full input focus:border-primary border-base-content bg-transparent;
+    }
+    .input-label {
+        @apply absolute top-3 left-4 -z-10 transform duration-300;
+    }
+    .label-top {
+        @apply scale-75 -translate-y-6 z-0 bg-base-100 text-primary ml-2 px-2;
+    }
 }
