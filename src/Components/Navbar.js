@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { CgMenuRight, CgClose } from "react-icons/cg";
 import ThemeToggle from "./ThemeToggle";
+import AuthDropDown from "./AuthDropDown";
 
 const Navbar = () => {
     const [open, setOpen] = useState(true);
@@ -19,12 +20,13 @@ const Navbar = () => {
                 <Link to="/">
                     <h1>Pahlovi</h1>
                 </Link>
-                <div className="flex items-center">
-                    <label className="lg:hidden swap swap-rotate text-3xl cursor-pointer">
+                <div className="flex lg:hidden items-center space-x-5">
+                    <label className="swap swap-rotate text-3xl cursor-pointer">
                         <input onClick={() => setOpen(!open)} type="checkbox" />
                         <CgMenuRight className="swap-off" />
                         <CgClose className="swap-on" />
                     </label>
+                    <AuthDropDown className="flex" />
                 </div>
                 <div className={nevMenu}>
                     <div className="flex flex-col lg:flex-row items-center gap-x-5 gap-y-3">
@@ -37,6 +39,7 @@ const Navbar = () => {
                         <NavLink to="/signup" className={navLink}>
                             signup
                         </NavLink>
+                        <AuthDropDown className="hidden lg:flex" />
                         <ThemeToggle theme={theme} setTheme={setTheme} />
                     </div>
                 </div>

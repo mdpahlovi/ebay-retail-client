@@ -1,21 +1,61 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../Contexts/UserContext";
 import Input from "../Components/Input";
 import Header from "../Components/Header";
 import { ImGoogle, ImGithub } from "react-icons/im";
 import { BsFacebook } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Signin = () => {
+    const { signIn, signInByGoogle, signInByFacebook, signInByGithub } = useContext(AuthContext);
+
     const handelSubmit = (event) => {
         // Get Form Data
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
+
+        signIn(email, password)
+            .then((result) => {
+                toast.success("User Signin Completed");
+                form.reset();
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                if (errorMessage === "Firebase: Error (auth/wrong-password).") {
+                    toast.error("OPPS ! Your password didn't match");
+                    form.reset();
+                } else if (errorMessage === "Firebase: Error (auth/user-not-found).") {
+                    toast.error("OPPS ! User doesn't found");
+                    form.reset();
+                }
+            });
     };
 
     // Social Signin
+    const handelGoogleSignIn = () => {
+        signInByGoogle()
+            .then((result) => {
+                toast.success("Google Signin Done");
+            })
+            .catch((error) => console.error(error));
+    };
+    const handelFacebookSignIn = () => {
+        signInByFacebook()
+            .then((result) => {
+                toast.success("Facebook Signin Done");
+            })
+            .catch((error) => console.error(error));
+    };
+    const handelGithubSignIn = () => {
+        signInByGithub()
+            .then((result) => {
+                toast.success("Github Signin Done");
+            })
+            .catch((error) => console.error(error));
+    };
 
     return (
         <>
@@ -39,15 +79,15 @@ const Signin = () => {
                     <p className="mx-2">Or Sign in with</p>
                 </div>
                 <div className="grid grid-col-1 xs:grid-cols-[auto_auto_auto] gap-5">
-                    <button className="btn btn-outline btn-primary gap-1.5">
+                    <button onClick={handelGoogleSignIn} className="btn btn-outline btn-primary gap-1.5">
                         <ImGoogle />
                         Google
                     </button>
-                    <button className="btn btn-outline btn-primary gap-1.5">
+                    <button onClick={handelFacebookSignIn} className="btn btn-outline btn-primary gap-1.5">
                         <BsFacebook />
                         Facebook
                     </button>
-                    <button className="btn btn-outline btn-primary gap-1.5">
+                    <button onClick={handelGithubSignIn} className="btn btn-outline btn-primary gap-1.5">
                         <ImGithub />
                         Github
                     </button>

@@ -1,21 +1,44 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../Contexts/UserContext";
 import Input from "../Components/Input";
 import Header from "../Components/Header";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Signup = () => {
+    const { createUser } = useContext(AuthContext);
+
     const handelSubmit = (event) => {
         // Get Form Data
         event.preventDefault();
         const form = event.target;
         const name = `${form.fastName.value} ${form.lastName.value}`;
+        const img = form.img.value;
         const email = form.email.value;
         const password = form.password.value;
-        const confirmPass = form.confirmPass.value;
-        console.log(name, email, password, confirmPass);
-    };
+        const confirmPassword = form.confirmPass.value;
 
-    // Social Signin
+        // Check Password
+        if (password.length < 6) {
+            toast.error("Password must be 6 cherecter or more");
+            return;
+        }
+        if (password !== confirmPassword) {
+            toast.error("Your password didn't match");
+            return;
+        }
+
+        // Create New User
+        createUser(email, password)
+            .then((result) => {
+                const user = result.user;
+                user.displayName = name;
+                user.photoURL = img;
+                form.reset();
+                toast.success("Account Created");
+            })
+            .catch((error) => console.error(error));
+    };
 
     return (
         <>
