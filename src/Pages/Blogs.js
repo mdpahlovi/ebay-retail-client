@@ -1,8 +1,10 @@
 import React from "react";
 import Header from "../Components/Header";
 import BlogCard from "../Components/BlogCard";
+import { useLoaderData } from "react-router-dom";
 
 const Blogs = () => {
+    const blogs = useLoaderData();
     return (
         <>
             <Header title={"Our Letest Blogs"} route={"Blogs"}></Header>
@@ -13,8 +15,9 @@ const Blogs = () => {
                     </p>
                 </div>
                 <div className="grid gap-8 lg:grid-cols-2">
-                    <BlogCard />
-                    <BlogCard />
+                    {blogs.map((blog) => (
+                        <BlogCard key={blog._id} blog={blog} />
+                    ))}
                 </div>
             </section>
         </>
