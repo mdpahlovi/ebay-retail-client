@@ -1,15 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { RiSunFill, RiMoonFill } from "react-icons/ri";
+import { AuthContext } from "../Contexts/UserContext";
 
-function ThemeToggle({ theme, setTheme }) {
-    useEffect(() => {
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            setTheme("dark");
-        } else {
-            setTheme("light");
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+function ThemeToggle() {
+    const { theme, setTheme } = useContext(AuthContext);
 
     useEffect(() => {
         if (theme === "light") {

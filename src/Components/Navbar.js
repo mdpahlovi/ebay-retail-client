@@ -1,12 +1,19 @@
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { CgMenuRight, CgClose } from "react-icons/cg";
+import { SiSlideshare } from "react-icons/si";
 import ThemeToggle from "./ThemeToggle";
 import AuthDropDown from "./AuthDropDown";
+import { AuthContext } from "../Contexts/UserContext";
+import LightLogo from "../Assets/logo/light-logo.png";
+import DarkLogo from "../Assets/logo/dark-logo.png";
 
 const Navbar = () => {
+    const { theme } = useContext(AuthContext);
     const [open, setOpen] = useState(true);
-    const [theme, setTheme] = useState(null);
+
+    const location = useLocation();
+    const { pathname } = location;
 
     // Active  Link
     const navLink = ({ isActive }) => (isActive ? "font-bold underline" : "");
@@ -15,17 +22,23 @@ const Navbar = () => {
     } lg:opacity-100 lg:translate-x-0`;
 
     return (
-        <nav className="sticky bg-base-100 top-0">
+        <nav className="sticky bg-base-100 top-0 z-20 shadow-md">
             <div className="my-container h-16 lg:h-20 flex justify-between items-center">
                 <Link to="/">
-                    <h1>Pahlovi</h1>
+                    <img className="w-40 lg:w-48" src={theme === "dark" ? DarkLogo : LightLogo} alt="" />
                 </Link>
                 <div className="flex lg:hidden items-center space-x-5">
-                    <label className="swap swap-rotate text-3xl cursor-pointer">
-                        <input onClick={() => setOpen(!open)} type="checkbox" />
-                        <CgMenuRight className="swap-off" />
-                        <CgClose className="swap-on" />
-                    </label>
+                    {pathname === "/dashboard" ? (
+                        <label htmlFor="dashboard-drawer" className="drawer-button lg:hidden cursor-pointer">
+                            <SiSlideshare className="text-2xl" />
+                        </label>
+                    ) : (
+                        <label className="swap swap-rotate text-3xl cursor-pointer">
+                            <input onClick={() => setOpen(!open)} type="checkbox" />
+                            <CgMenuRight className="swap-off" />
+                            <CgClose className="swap-on" />
+                        </label>
+                    )}
                     <AuthDropDown className="flex" />
                 </div>
                 <div className={nevMenu}>
@@ -39,8 +52,11 @@ const Navbar = () => {
                         <NavLink to="/signup" className={navLink}>
                             signup
                         </NavLink>
+                        <NavLink to="/blogs" className={navLink}>
+                            Blogs
+                        </NavLink>
                         <AuthDropDown className="hidden lg:flex" />
-                        <ThemeToggle theme={theme} setTheme={setTheme} />
+                        <ThemeToggle />
                     </div>
                 </div>
             </div>
