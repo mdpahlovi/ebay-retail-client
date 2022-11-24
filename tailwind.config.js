@@ -32,6 +32,8 @@ module.exports = {
                     neutral: "#151719",
                     "neutral-content": "#ffffff",
                     primary: "#F48E00",
+                    error: "#FF3333",
+                    "error-content": "#FFFFFF",
                 },
                 dark: {
                     ...require("daisyui/src/colors/themes")["[data-theme=dark]"],
@@ -40,6 +42,8 @@ module.exports = {
                     neutral: "#ffffff",
                     "neutral-content": "#151719",
                     primary: "#F48E00",
+                    error: "#FF3333",
+                    "error-content": "#FFFFFF",
                 },
             },
             "light",

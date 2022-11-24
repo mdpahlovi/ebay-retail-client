@@ -1,3 +1,4 @@
+// Get User Roll By Email
 export const getRole = async (email) => {
     const response = await fetch(`http://localhost:5000/user/${email}`, {
         method: "GET",
@@ -10,6 +11,7 @@ export const getRole = async (email) => {
     return user?.role;
 };
 
+// Get All Buyer
 export const getAllBuyer = async () => {
     const response = await fetch(`http://localhost:5000/users/allbuyer`, {
         method: "GET",
@@ -22,6 +24,7 @@ export const getAllBuyer = async () => {
     return users;
 };
 
+// Get All Seller
 export const getAllSeller = async () => {
     const response = await fetch(`http://localhost:5000/users/allseller`, {
         method: "GET",
@@ -32,4 +35,13 @@ export const getAllSeller = async () => {
     });
     const users = await response.json();
     return users;
+};
+
+// Delete User By Email
+export const deleteUser = async (email) => {
+    const response = await fetch(`http://localhost:5000/user/${email}`, {
+        method: "DELETE",
+    });
+    const message = await response.json();
+    return message;
 };
