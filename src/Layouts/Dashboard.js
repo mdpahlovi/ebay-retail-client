@@ -19,7 +19,9 @@ const Dashboard = () => {
                     </div>
                     <h3 className="text-3xl font-bold mb-6">{displayName}</h3>
                     <div className="w-full flex flex-col [&>*]:rounded-none [&>*]:justify-start">
-                        <Link className="btn btn-ghost">Item 1</Link>
+                        <Link to="alluser" className="btn btn-ghost">
+                            All User
+                        </Link>
                         <Link className="btn btn-ghost">I have border</Link>
                         <Link className="btn btn-ghost">Item 3</Link>
                         <Link to="/" className="btn hover:bg-base-content/95">

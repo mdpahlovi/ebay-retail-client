@@ -8,6 +8,8 @@ import ErrorPage from "../Pages/ErrorPage";
 import Blogs from "../Pages/Blogs";
 import DeshboardHome from "../Pages/DeshboardHome";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import AllUser from "../Pages/AllUser";
 
 const router = createBrowserRouter([
     {
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
                     {
                         path: "/dashboard",
                         element: <DeshboardHome />,
+                    },
+                    {
+                        path: "alluser",
+                        element: (
+                            <AdminRoute>
+                                <AllUser />
+                            </AdminRoute>
+                        ),
                     },
                 ],
             },

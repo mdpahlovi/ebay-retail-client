@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { setAuthAndToken } from "../Api/auth";
 
 const Signin = () => {
-    const { signIn, signInByGoogle, signInByFacebook, signInByGithub } = useContext(AuthContext);
+    const { setLoading, signIn, signInByGoogle, signInByFacebook, signInByGithub } = useContext(AuthContext);
 
     const navigate = useNavigate();
     const loaction = useLocation();
@@ -25,8 +25,8 @@ const Signin = () => {
         signIn(email, password)
             .then((result) => {
                 setAuthAndToken(result.user);
-                toast.success("User Signin Completed");
                 form.reset();
+                toast.success("User Signin Completed");
                 navigate(from, { replace: true });
             })
             .catch((error) => {
@@ -38,6 +38,7 @@ const Signin = () => {
                     toast.error("OPPS ! User doesn't found");
                     form.reset();
                 }
+                setLoading(false);
             });
     };
 
@@ -49,7 +50,10 @@ const Signin = () => {
                 toast.success("Google Signin Done");
                 navigate(from, { replace: true });
             })
-            .catch((error) => console.error(error));
+            .catch((error) => {
+                toast.error(error.message);
+                setLoading(false);
+            });
     };
     const handelFacebookSignIn = () => {
         signInByFacebook()
@@ -58,7 +62,10 @@ const Signin = () => {
                 toast.success("Facebook Signin Done");
                 navigate(from, { replace: true });
             })
-            .catch((error) => console.error(error));
+            .catch((error) => {
+                toast.error(error.message);
+                setLoading(false);
+            });
     };
     const handelGithubSignIn = () => {
         signInByGithub()
@@ -67,7 +74,10 @@ const Signin = () => {
                 toast.success("Github Signin Done");
                 navigate(from, { replace: true });
             })
-            .catch((error) => console.error(error));
+            .catch((error) => {
+                toast.error(error.message);
+                setLoading(false);
+            });
     };
 
     return (

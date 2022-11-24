@@ -22,6 +22,7 @@ const Signup = () => {
         const email = form.email.value;
         const password = form.password.value;
         const confirmPassword = form.confirmPass.value;
+        const isSeller = form.isSeller;
 
         // Check Password
         if (password !== confirmPassword) {
@@ -40,18 +41,24 @@ const Signup = () => {
             .then((imageData) => {
                 createUser(email, password)
                     .then((result) => {
-                        setAuthAndToken(result.user);
+                        isSeller.checked ? setAuthAndToken(result.user, "seller") : setAuthAndToken(result.user);
                         updateUserProfile(name, imageData.data.display_url)
                             .then(() => {
                                 toast.success("Created New User");
-                                setLoading(false);
                                 navigate(from, { replace: true });
+                                setLoading(false);
                             })
-                            .catch((error) => console.error(error));
+                            .catch((error) => {
+                                toast.error(error.message);
+                                setLoading(false);
+                            });
                     })
-                    .catch((error) => console.error(error));
+                    .catch((error) => {
+                        toast.error(error.message);
+                        setLoading(false);
+                    });
             })
-            .catch((error) => console.error(error));
+            .catch((error) => toast.error(error));
     };
 
     // Check & Set image input fild style
@@ -80,8 +87,8 @@ const Signup = () => {
                     <Input type={"password"} name={"confirmPass"} text={"Confirm Password"} />
                     <div className="flex flex-wrap justify-between items-center">
                         <label className="label cursor-pointer">
-                            <span className="mr-2">Term and Condition</span>
-                            <input type="checkbox" className="checkbox checkbox-primary" />
+                            <span className="mr-2">Create Seller Account</span>
+                            <input type="checkbox" name="isSeller" className="checkbox checkbox-primary" />
                         </label>
                     </div>
                     <input type={"submit"} value="Sign Up" className="w-full btn btn-primary" />

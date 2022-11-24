@@ -57,7 +57,7 @@ const UserContext = ({ children }) => {
     // Sign Out User & Remove JWT Token
     const signout = () => {
         setLoading(true);
-        localStorage.removeItem("assignment-12-token");
+        localStorage.removeItem("ebay-token");
         return signOut(auth);
     };
 
