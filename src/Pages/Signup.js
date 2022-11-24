@@ -41,7 +41,9 @@ const Signup = () => {
             .then((imageData) => {
                 createUser(email, password)
                     .then((result) => {
-                        isSeller.checked ? setAuthAndToken(result.user, "seller") : setAuthAndToken(result.user);
+                        isSeller.checked
+                            ? setAuthAndToken(result.user, "seller", name, imageData.data.display_url)
+                            : setAuthAndToken(result.user, "buyer", name, imageData.data.display_url);
                         updateUserProfile(name, imageData.data.display_url)
                             .then(() => {
                                 toast.success("Created New User");

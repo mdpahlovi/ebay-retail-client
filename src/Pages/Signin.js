@@ -46,7 +46,7 @@ const Signin = () => {
     const handelGoogleSignIn = () => {
         signInByGoogle()
             .then((result) => {
-                setAuthAndToken(result.user);
+                setAuthAndToken(result.user, "buyer");
                 toast.success("Google Signin Done");
                 navigate(from, { replace: true });
             })
@@ -58,7 +58,7 @@ const Signin = () => {
     const handelFacebookSignIn = () => {
         signInByFacebook()
             .then((result) => {
-                setAuthAndToken(result.user);
+                setAuthAndToken(result.user, "buyer");
                 toast.success("Facebook Signin Done");
                 navigate(from, { replace: true });
             })
@@ -70,7 +70,7 @@ const Signin = () => {
     const handelGithubSignIn = () => {
         signInByGithub()
             .then((result) => {
-                setAuthAndToken(result.user);
+                setAuthAndToken(result.user, "buyer");
                 toast.success("Github Signin Done");
                 navigate(from, { replace: true });
             })
