@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { getAllUser } from "../Api/user";
+import { toast } from "react-toastify";
+import { getAllBuyer } from "../Api/user";
 
-const AllUser = () => {
-    const [users, setUsers] = useState([]);
-
+const AllBuyer = () => {
+    const [buyers, setBuyers] = useState([]);
     useEffect(() => {
-        getAllUser().then((data) => {
-            setUsers(data);
-        });
+        getAllBuyer()
+            .then((res) => setBuyers(res))
+            .catch((err) => toast.error(err.message));
     }, []);
-
     return (
         <div className="overflow-x-auto">
             <table className="table w-full">
@@ -23,17 +22,17 @@ const AllUser = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user, index) => (
-                        <tr key={user._id}>
+                    {buyers.map(({ _id, avatar, name, role }, index) => (
+                        <tr key={_id}>
                             <th>{index + 1}</th>
                             <td>
                                 <div className="w-10 mask mask-squircle">
-                                    <img src={user.avatar} alt="" />
+                                    <img src={avatar} alt="" />
                                 </div>
                             </td>
-                            <td>{user.name}</td>
+                            <td>{name}</td>
                             <td>
-                                <button className="btn btn-sm btn-primary">{user.role ? user.role : "buyer"}</button>
+                                <button className="btn btn-sm btn-primary">{role}</button>
                             </td>
                             <td>
                                 <button className="btn btn-sm btn-error">report</button>
@@ -46,4 +45,4 @@ const AllUser = () => {
     );
 };
 
-export default AllUser;
+export default AllBuyer;

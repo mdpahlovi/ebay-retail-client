@@ -19,8 +19,11 @@ const Dashboard = () => {
                     </div>
                     <h3 className="text-3xl font-bold mb-6">{displayName}</h3>
                     <div className="w-full flex flex-col [&>*]:rounded-none [&>*]:justify-start">
-                        <Link to="alluser" className="btn btn-ghost">
-                            All User
+                        <Link to="all-buyer" className="btn btn-ghost">
+                            All Buyer
+                        </Link>
+                        <Link to="all-seller" className="btn btn-ghost">
+                            All Seller
                         </Link>
                         <Link className="btn btn-ghost">I have border</Link>
                         <Link className="btn btn-ghost">Item 3</Link>

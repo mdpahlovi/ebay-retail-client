@@ -9,7 +9,8 @@ import Blogs from "../Pages/Blogs";
 import DeshboardHome from "../Pages/DeshboardHome";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
-import AllUser from "../Pages/AllUser";
+import AllBuyer from "../Pages/AllBuyer";
+import AllSeller from "../Pages/AllSeller";
 
 const router = createBrowserRouter([
     {
@@ -46,10 +47,18 @@ const router = createBrowserRouter([
                         element: <DeshboardHome />,
                     },
                     {
-                        path: "alluser",
+                        path: "all-buyer",
                         element: (
                             <AdminRoute>
-                                <AllUser />
+                                <AllBuyer />
+                            </AdminRoute>
+                        ),
+                    },
+                    {
+                        path: "all-seller",
+                        element: (
+                            <AdminRoute>
+                                <AllSeller />
                             </AdminRoute>
                         ),
                     },
