@@ -5,7 +5,7 @@ const TableLoader = () => {
         <>
             <tr className="animate-pulse">
                 <th>
-                    <div className="w-10 h-5 bg-base-content/10"></div>
+                    <div className="w-5 h-5 bg-base-content/10"></div>
                 </th>
                 <td>
                     <div className="w-10 h-10 mask mask-squircle bg-base-content/10"></div>
@@ -22,7 +22,7 @@ const TableLoader = () => {
             </tr>
             <tr className="animate-pulse">
                 <th>
-                    <div className="w-10 h-5 bg-base-content/10"></div>
+                    <div className="w-5 h-5 bg-base-content/10"></div>
                 </th>
                 <td>
                     <div className="w-10 h-10 mask mask-squircle bg-base-content/10"></div>
