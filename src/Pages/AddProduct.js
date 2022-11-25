@@ -54,7 +54,11 @@ const AddProduct = () => {
                 condition,
                 description,
                 date,
-                seller: { email, user_name, phone, avatar, verification },
+                verification,
+                seller_email: email,
+                seller_avatar: avatar,
+                seller_name: user_name,
+                seller_phone: phone,
             };
 
             getImgUrl(img)
