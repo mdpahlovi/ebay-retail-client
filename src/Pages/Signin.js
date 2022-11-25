@@ -23,18 +23,17 @@ const Signin = () => {
         const password = form.password.value;
 
         signIn(email, password)
-            .then((result) => {
-                setAuthAndToken(result.user);
+            .then(({ user }) => {
+                setAuthAndToken(user);
                 form.reset();
                 toast.success("User Signin Completed");
                 navigate(from, { replace: true });
             })
-            .catch((error) => {
-                const errorMessage = error.message;
-                if (errorMessage === "Firebase: Error (auth/wrong-password).") {
+            .catch(({ message }) => {
+                if (message === "Firebase: Error (auth/wrong-password).") {
                     toast.error("OPPS ! Your password didn't match");
                     form.reset();
-                } else if (errorMessage === "Firebase: Error (auth/user-not-found).") {
+                } else if (message === "Firebase: Error (auth/user-not-found).") {
                     toast.error("OPPS ! User doesn't found");
                     form.reset();
                 }
@@ -45,37 +44,37 @@ const Signin = () => {
     // Social Signin
     const handelGoogleSignIn = () => {
         signInByGoogle()
-            .then((result) => {
-                setAuthAndToken(result.user, "buyer");
+            .then(({ user }) => {
+                setAuthAndToken(user, "buyer");
                 toast.success("Google Signin Done");
                 navigate(from, { replace: true });
             })
-            .catch((error) => {
-                toast.error(error.message);
+            .catch(({ message }) => {
+                toast.error(message);
                 setLoading(false);
             });
     };
     const handelFacebookSignIn = () => {
         signInByFacebook()
-            .then((result) => {
-                setAuthAndToken(result.user, "buyer");
+            .then(({ user }) => {
+                setAuthAndToken(user, "buyer");
                 toast.success("Facebook Signin Done");
                 navigate(from, { replace: true });
             })
-            .catch((error) => {
-                toast.error(error.message);
+            .catch(({ message }) => {
+                toast.error(message);
                 setLoading(false);
             });
     };
     const handelGithubSignIn = () => {
         signInByGithub()
-            .then((result) => {
-                setAuthAndToken(result.user, "buyer");
+            .then(({ user }) => {
+                setAuthAndToken({ user }, "buyer");
                 toast.success("Github Signin Done");
                 navigate(from, { replace: true });
             })
-            .catch((error) => {
-                toast.error(error.message);
+            .catch(({ message }) => {
+                toast.error(message);
                 setLoading(false);
             });
     };

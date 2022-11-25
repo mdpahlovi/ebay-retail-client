@@ -11,6 +11,19 @@ export const getRole = async (email) => {
     return user?.role;
 };
 
+// Get User By Email
+export const getCorrentUser = async (email) => {
+    const response = await fetch(`http://localhost:5000/user/${email}`, {
+        method: "GET",
+        headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("ebay-token")}`,
+        },
+    });
+    const user = await response.json();
+    return user;
+};
+
 // Get All Buyer
 export const getAllBuyer = async () => {
     const response = await fetch(`http://localhost:5000/users/allbuyer`, {

@@ -15,16 +15,16 @@ const AllSeller = () => {
                 setSellers(res);
                 setLoading(false);
             })
-            .catch((err) => toast.error(err.message));
+            .catch(({ message }) => toast.error(message));
     }, [refresh]);
 
     const handelDelete = (email) => {
         deleteUser(email)
-            .then((res) => {
-                toast.success(`${res.message} Seller`);
+            .then(({ message }) => {
+                toast.success(`${message} Seller`);
                 setRefresh(!refresh);
             })
-            .catch((err) => toast.error(err.message));
+            .catch(({ message }) => toast.error(message));
     };
 
     return (

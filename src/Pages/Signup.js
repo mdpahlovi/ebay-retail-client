@@ -5,6 +5,7 @@ import Header from "../Components/Header";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { setAuthAndToken } from "../Api/auth";
+import { getImgUrl } from "../Api/getImgUrl";
 
 const Signup = () => {
     const { setLoading, createUser, updateUserProfile } = useContext(AuthContext);
@@ -31,36 +32,28 @@ const Signup = () => {
         }
 
         // Update Img & Then Create User
-        const formData = new FormData();
-        formData.append("image", img);
-        fetch(`https://api.imgbb.com/1/upload?key=830547d2f0f205ab23f8516091510fb2`, {
-            method: "POST",
-            body: formData,
-        })
-            .then((res) => res.json())
-            .then((imageData) => {
+        getImgUrl(img)
+            .then(({ data }) => {
                 createUser(email, password)
-                    .then((result) => {
-                        isSeller.checked
-                            ? setAuthAndToken(result.user, "seller", name, imageData.data.display_url)
-                            : setAuthAndToken(result.user, "buyer", name, imageData.data.display_url);
-                        updateUserProfile(name, imageData.data.display_url)
+                    .then(({ user }) => {
+                        isSeller.checked ? setAuthAndToken(user, "seller", name, data.display_url) : setAuthAndToken(user, "buyer", name, data.display_url);
+                        updateUserProfile(name, data.display_url)
                             .then(() => {
                                 toast.success("Created New User");
                                 navigate(from, { replace: true });
                                 setLoading(false);
                             })
-                            .catch((error) => {
-                                toast.error(error.message);
+                            .catch(({ message }) => {
+                                toast.error(message);
                                 setLoading(false);
                             });
                     })
-                    .catch((error) => {
-                        toast.error(error.message);
+                    .catch(({ message }) => {
+                        toast.error(message);
                         setLoading(false);
                     });
             })
-            .catch((error) => toast.error(error));
+            .catch(({ message }) => toast.error(message));
     };
 
     // Check & Set image input fild style
