@@ -1,12 +1,56 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import format from "date-fns/format";
 import parseISO from "date-fns/parseISO";
 import Check from "../Assets/Check.png";
+import BookModal from "./BookModal";
+import { AuthContext } from "../Contexts/UserContext";
+import { toast } from "react-toastify";
+import { bookProduct } from "../Api/products";
 
 const ProductCard = ({ product }) => {
-    const { name, image, location, resale_price, original_price, used_year, description, condition, date, seller_name, seller_avatar, verification } = product;
+    const {
+        _id,
+        name,
+        image,
+        location,
+        resale_price,
+        original_price,
+        used_year,
+        description,
+        condition,
+        date,
+        seller_name,
+        seller_email,
+        seller_avatar,
+        verification,
+    } = product;
     const dateIs = format(parseISO(date), "PP");
     const timeIs = format(parseISO(date), "p");
+    const { user } = useContext(AuthContext);
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [productId, setProductId] = useState(null);
+    const handeBook = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const meet_location = form.meet_location.value;
+        const buyer_email = user.email;
+        const buyer_name = user.displayName;
+        const buyer_avatar = user.photoURL;
+        const buyer_phone = form.buyer_phone.value;
+
+        if (buyer_email === seller_email) {
+            return toast.error("You Are An Seller");
+        }
+
+        if ((meet_location, buyer_phone)) {
+            const status = "booked";
+            const product = { meet_location, buyer_phone, status, buyer_name, buyer_email, buyer_avatar };
+            bookProduct(productId, product)
+                .then(({ message }) => toast.success(`${message} The ${name}`))
+                .catch(({ message }) => toast.error(message));
+        }
+    };
 
     return (
         <div className="flex flex-col sm:flex-row rounded-lg shadow-md">
@@ -42,9 +86,17 @@ const ProductCard = ({ product }) => {
                             <h3 className="text-sm text-base-content/75 mt-0.5">{`${dateIs} ${timeIs}`}</h3>
                         </div>
                     </div>
-                    <button className="btn btn-sm btn-primary" type="submit">
+                    <button
+                        onClick={() => {
+                            setIsOpen(true);
+                            setProductId(_id);
+                        }}
+                        className="btn btn-sm btn-primary"
+                        type="submit"
+                    >
                         Book Now
                     </button>
+                    <BookModal user={user} isOpen={isOpen} setIsOpen={setIsOpen} handeBook={handeBook} name={name} price={resale_price} />
                 </div>
             </div>
         </div>

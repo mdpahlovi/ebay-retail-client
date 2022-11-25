@@ -24,3 +24,26 @@ export const getUserProducts = async (email) => {
     const products = await response.json();
     return products;
 };
+
+// Delete User By Email
+export const deleteProduct = async (id) => {
+    const response = await fetch(`http://localhost:5000/product/${id}`, {
+        method: "DELETE",
+    });
+    const message = await response.json();
+    return message;
+};
+
+// Update Product
+export const bookProduct = async (id, product) => {
+    const response = await fetch(`http://localhost:5000/product/${id}`, {
+        method: "PATCH",
+        headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("ebay-token")}`,
+        },
+        body: JSON.stringify(product),
+    });
+    const productData = await response.json();
+    return productData;
+};
