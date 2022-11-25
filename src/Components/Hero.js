@@ -10,7 +10,7 @@ const Hero = () => {
                     Startup Website <br />
                     with TailGrids.
                 </h1>
-                <p className="max-w-xl lg:max-w-[480px]">
+                <p className="max-w-xl lg:max-w-[480px] pb-2">
                     With TailGrids, business and students thrive together. Business can perfectly match their staffing to changing demand throughout the dayed.
                 </p>
                 <div className="flex flex-wrap items-center gap-5">

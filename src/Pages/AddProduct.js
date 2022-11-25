@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getImgUrl } from "../Api/getImgUrl";
 import { addProduct } from "../Api/products";
@@ -10,8 +11,21 @@ const AddProduct = () => {
     const { user, loading } = useContext(AuthContext);
     const [userLoading, setUserLoading] = useState(true);
     const [correntUser, setCorrentUser] = useState({});
+    const [submitLoading, setSubmitLoading] = useState(false);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        getCorrentUser(user?.email)
+            .then((res) => {
+                setCorrentUser(res);
+                setUserLoading(false);
+            })
+            .catch(({ message }) => toast.error(message));
+    }, [user]);
 
     const handelSubmit = (event) => {
+        setSubmitLoading(true);
         event.preventDefault();
         const form = event.target;
         const category = form.category.value;
@@ -26,15 +40,9 @@ const AddProduct = () => {
         const description = form.description.value;
         const date = new Date();
 
-        getCorrentUser(user?.email)
-            .then((res) => {
-                setCorrentUser(res);
-                setUserLoading(false);
-            })
-            .catch(({ message }) => toast.error(message));
-
         if (!loading && !userLoading) {
-            const { email, user_name, avatar, verification } = correntUser;
+            const { email, avatar, verification } = correntUser;
+            const user_name = correntUser.name;
 
             const product = {
                 category,
@@ -53,7 +61,12 @@ const AddProduct = () => {
                 .then(({ data }) => {
                     product.image = data.display_url;
                     addProduct(product)
-                        .then(({ message }) => toast.success(message))
+                        .then(({ message }) => {
+                            setSubmitLoading(false);
+                            toast.success(message);
+                            navigate("/dashboard/my-product");
+                            form.reset();
+                        })
                         .catch(({ message }) => toast.error(message));
                 })
                 .catch(({ message }) => toast.error(message));
@@ -91,7 +104,7 @@ const AddProduct = () => {
                 <Input type={"text"} name={"condition"} text={"Condition"} />
             </div>
             <Input type={"text"} name={"description"} text={"Description"} />
-            <input type={"submit"} value="submit" className="w-full btn btn-primary" />
+            <input type={"submit"} value={submitLoading ? "Loading..." : "Submit"} className="w-full btn btn-primary" />
         </form>
     );
 };

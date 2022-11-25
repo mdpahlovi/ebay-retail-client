@@ -14,6 +14,7 @@ import AllSeller from "../Pages/AllSeller";
 import AddProduct from "../Pages/AddProduct";
 import SellerRoute from "./SellerRoute";
 import MyProduct from "../Pages/MyProduct";
+import CategoryProduct from "../Pages/CategoryProduct";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +24,14 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />,
+            },
+            {
+                path: "/category/:category",
+                element: (
+                    <PrivateRoute>
+                        <CategoryProduct />
+                    </PrivateRoute>
+                ),
             },
             {
                 path: "/signin",
