@@ -30,7 +30,7 @@ const CategoryProduct = () => {
         return (
             <>
                 <Header title={categoryName} route={categoryName}></Header>
-                <section className="my-container section-gap grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <section className="my-container section-gap grid grid-cols-1 xl:grid-cols-2 gap-12">
                     {products.map((product) => (
                         <ProductCard key={product._id} product={product} />
                     ))}
