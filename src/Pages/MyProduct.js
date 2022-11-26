@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { deleteProduct, getUserProducts } from "../Api/products";
+import { deleteProduct, getUserProducts, bookProduct } from "../Api/products";
 import TableLoader from "../Components/TableLoader";
 import { AuthContext } from "../Contexts/UserContext";
 
@@ -24,6 +24,24 @@ const MyProduct = () => {
         deleteProduct(id)
             .then(({ message }) => {
                 toast.success(`${message} The ${name}`);
+                setRefresh(!refresh);
+            })
+            .catch(({ message }) => toast.error(message));
+    };
+
+    const handelAdvertised = (id) => {
+        bookProduct(id, { advertised: true })
+            .then(({ message }) => {
+                toast.success(`${message} For Ad`);
+                setRefresh(!refresh);
+            })
+            .catch(({ message }) => toast.error(message));
+    };
+
+    const removeAdvertised = (id) => {
+        bookProduct(id, { advertised: false })
+            .then(({ message }) => {
+                toast.success("Remove For Add");
                 setRefresh(!refresh);
             })
             .catch(({ message }) => toast.error(message));
@@ -55,7 +73,15 @@ const MyProduct = () => {
                                     <span className="badge badge-primary badge-lg">{status ? status : "UnSoled"}</span>
                                 </td>
                                 <td>
-                                    <button className="btn btn-sm btn-primary">{advertised ? "Runnig" : "Make"}</button>
+                                    {advertised ? (
+                                        <button onClick={() => removeAdvertised(_id)} className="btn btn-sm btn-primary">
+                                            Running
+                                        </button>
+                                    ) : (
+                                        <button onClick={() => handelAdvertised(_id)} className="btn btn-sm btn-primary">
+                                            Make
+                                        </button>
+                                    )}
                                 </td>
                                 <td>
                                     <button onClick={() => handelDelete(_id, name)} className="btn btn-sm btn-error">

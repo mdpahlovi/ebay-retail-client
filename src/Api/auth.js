@@ -8,7 +8,7 @@ export const setAuthAndToken = (user, role, name, img) => {
         currentUser.avatar = user.photoURL;
     }
 
-    fetch(`http://localhost:5000/user/${user?.email}`, {
+    fetch(`https://ebay-server.vercel.app/user/${user?.email}`, {
         method: "PUT",
         headers: {
             "content-type": "application/json",

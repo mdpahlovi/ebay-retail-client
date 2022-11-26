@@ -12,3 +12,6 @@
 -   Buyer can book product & see his booking.
 -   Firebase Authentication Email & Password Base & Google.
 -   Swich Light & Dark Mode.
+
+adminEmail: mdpahlovi07@gmail.com
+adminPassword: 12345678

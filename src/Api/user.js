@@ -1,6 +1,6 @@
 // Get User Roll By Email
 export const getRole = async (email) => {
-    const response = await fetch(`http://localhost:5000/user/${email}`, {
+    const response = await fetch(`https://ebay-server.vercel.app/user/${email}`, {
         method: "GET",
         headers: {
             "content-type": "application/json",
@@ -13,7 +13,7 @@ export const getRole = async (email) => {
 
 // Get User By Email
 export const getCorrentUser = async (email) => {
-    const response = await fetch(`http://localhost:5000/user/${email}`, {
+    const response = await fetch(`https://ebay-server.vercel.app/user/${email}`, {
         method: "GET",
         headers: {
             "content-type": "application/json",
@@ -26,7 +26,7 @@ export const getCorrentUser = async (email) => {
 
 // Get All Buyer
 export const getAllBuyer = async () => {
-    const response = await fetch(`http://localhost:5000/users/allbuyer`, {
+    const response = await fetch(`https://ebay-server.vercel.app/users/allbuyer`, {
         method: "GET",
         headers: {
             "content-type": "application/json",
@@ -39,7 +39,7 @@ export const getAllBuyer = async () => {
 
 // Get All Seller
 export const getAllSeller = async () => {
-    const response = await fetch(`http://localhost:5000/users/allseller`, {
+    const response = await fetch(`https://ebay-server.vercel.app/users/allseller`, {
         method: "GET",
         headers: {
             "content-type": "application/json",
@@ -52,7 +52,7 @@ export const getAllSeller = async () => {
 
 // Delete User By Email
 export const deleteUser = async (email) => {
-    const response = await fetch(`http://localhost:5000/user/${email}`, {
+    const response = await fetch(`https://ebay-server.vercel.app/user/${email}`, {
         method: "DELETE",
     });
     const message = await response.json();
@@ -60,7 +60,7 @@ export const deleteUser = async (email) => {
 };
 
 export const verifiyUser = async (email, product) => {
-    const response = await fetch(`http://localhost:5000/user/${email}`, {
+    const response = await fetch(`https://ebay-server.vercel.app/user/${email}`, {
         method: "PATCH",
         headers: {
             "content-type": "application/json",

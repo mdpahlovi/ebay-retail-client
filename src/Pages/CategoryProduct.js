@@ -10,7 +10,7 @@ const CategoryProduct = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/category/${category}`)
+        fetch(`https://ebay-server.vercel.app/category/${category}`)
             .then((res) => res.json())
             .then((data) => {
                 setProducts(data);

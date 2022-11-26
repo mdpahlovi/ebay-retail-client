@@ -1,6 +1,6 @@
 // Add a Product
 export const addProduct = async (product) => {
-    const response = await fetch(`http://localhost:5000/products`, {
+    const response = await fetch(`https://ebay-server.vercel.app/products`, {
         method: "POST",
         headers: {
             "content-type": "application/json",
@@ -14,7 +14,7 @@ export const addProduct = async (product) => {
 
 // Get Product By Email
 export const getUserProducts = async (email) => {
-    const response = await fetch(`http://localhost:5000/products/${email}`, {
+    const response = await fetch(`https://ebay-server.vercel.app/products/${email}`, {
         method: "GET",
         headers: {
             "content-type": "application/json",
@@ -27,7 +27,7 @@ export const getUserProducts = async (email) => {
 
 // Delete User By Email
 export const deleteProduct = async (id) => {
-    const response = await fetch(`http://localhost:5000/product/${id}`, {
+    const response = await fetch(`https://ebay-server.vercel.app/product/${id}`, {
         method: "DELETE",
     });
     const message = await response.json();
@@ -36,7 +36,7 @@ export const deleteProduct = async (id) => {
 
 // Update Product
 export const bookProduct = async (id, product) => {
-    const response = await fetch(`http://localhost:5000/product/${id}`, {
+    const response = await fetch(`https://ebay-server.vercel.app/product/${id}`, {
         method: "PATCH",
         headers: {
             "content-type": "application/json",
@@ -49,7 +49,7 @@ export const bookProduct = async (id, product) => {
 };
 
 export const verifiyUserProducts = async (email, product) => {
-    const response = await fetch(`http://localhost:5000/products/${email}`, {
+    const response = await fetch(`https://ebay-server.vercel.app/products/${email}`, {
         method: "PATCH",
         headers: {
             "content-type": "application/json",

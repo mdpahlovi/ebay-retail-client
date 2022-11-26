@@ -3,8 +3,8 @@ import React from "react";
 const TableLoader = ({ img, field, btn }) => {
     return (
         <>
-            {[...Array(3)].map((a) => (
-                <tr className="animate-pulse">
+            {[...Array(3)].map((a, i) => (
+                <tr className="animate-pulse" key={i}>
                     <th>
                         <div className="w-5 h-5 bg-base-content/10"></div>
                     </th>
@@ -16,15 +16,15 @@ const TableLoader = ({ img, field, btn }) => {
                         ""
                     )}
                     {field
-                        ? [...Array(field)].map((a) => (
-                              <td>
+                        ? [...Array(field)].map((a, i) => (
+                              <td key={i}>
                                   <div className="w-24 h-4 bg-base-content/10"></div>
                               </td>
                           ))
                         : ""}
                     {btn
-                        ? [...Array(btn)].map((a) => (
-                              <td>
+                        ? [...Array(btn)].map((a, i) => (
+                              <td key={i}>
                                   <div className="w-24 h-6 bg-base-content/10"></div>
                               </td>
                           ))
