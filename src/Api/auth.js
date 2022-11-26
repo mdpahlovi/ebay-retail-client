@@ -1,3 +1,6 @@
+import axios from "axios";
+import { toast } from "react-toastify";
+
 export const setAuthAndToken = (user, role, name, img) => {
     const currentUser = { email: user.email, role: role };
     if (name || img) {
@@ -8,13 +11,8 @@ export const setAuthAndToken = (user, role, name, img) => {
         currentUser.avatar = user.photoURL;
     }
 
-    fetch(`https://ebay-server.vercel.app/user/${user?.email}`, {
-        method: "PUT",
-        headers: {
-            "content-type": "application/json",
-        },
-        body: JSON.stringify(currentUser),
-    })
-        .then((res) => res.json())
-        .then((data) => localStorage.setItem("ebay-token", data.token));
+    axios
+        .put(`https://ebay-server.vercel.app/user/${user?.email}`, currentUser)
+        .then(({ data }) => localStorage.setItem("ebay-token", data.token))
+        .catch(({ message }) => toast.error(message));
 };

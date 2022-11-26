@@ -4,11 +4,12 @@ import "./index.css";
 import App from "./App";
 import UserContext from "./Contexts/UserContext";
 import Toastify from "./Utility/Toastify";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <QueryClientProvider client={new QueryClient()}>
+    <QueryClientProvider client={queryClient}>
         <UserContext>
             <App />
             <Toastify />

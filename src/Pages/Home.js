@@ -1,14 +1,17 @@
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
-import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import Advantage from "../Components/Advantage";
 import Hero from "../Components/Hero";
 import ServiceCard from "../Components/ServiceCard";
 
 const Home = () => {
-    const { isLoading, data } = useQuery("todos", () => {
-        return axios.get("https://ebay-server.vercel.app/categories");
+    const { isLoading, data } = useQuery({
+        queryKey: ["categories"],
+        queryFn: () => {
+            return axios.get("https://ebay-server.vercel.app/categories");
+        },
     });
 
     return (

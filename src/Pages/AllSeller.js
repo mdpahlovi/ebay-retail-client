@@ -71,11 +71,8 @@ const AllSeller = () => {
                                     <button className="btn btn-sm btn-primary">{role}</button>
                                 </td>
                                 <td>
-                                    <button
-                                        onClick={() => handelVerifiy(email)}
-                                        className={`btn btn-sm ${verification ? "btn-primary" : "hover:bg-base-content/90"}`}
-                                    >
-                                        {verification ? "Verified" : "Verifiy"}
+                                    <button onClick={() => handelVerifiy(email)} className="btn btn-sm btn-primary" disabled={verification ? true : false}>
+                                        {verification ? "Verified" : "UnVerified"}
                                     </button>
                                 </td>
                                 <td>
