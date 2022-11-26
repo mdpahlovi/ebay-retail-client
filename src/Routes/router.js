@@ -43,7 +43,6 @@ const router = createBrowserRouter([
             },
             {
                 path: "/blogs",
-                loader: () => fetch("https://ebay-server.vercel.app/blogs"),
                 element: <Blogs />,
             },
             {

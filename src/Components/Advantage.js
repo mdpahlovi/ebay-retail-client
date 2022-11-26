@@ -15,12 +15,13 @@ const Advantage = () => {
     }, []);
 
     return (
-        <section className="my-container section-gap flex flex-wrap justify-center gap-8">
+        <section className="my-container section-gap grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center gap-8">
             {loading
                 ? ""
-                : advertiesProduct.map(({ category, image, condition, name }) => (
+                : advertiesProduct.map(({ _id, category, image, condition, name }) => (
                       <div
-                          className="relative bg-cover bg-center bg-no-repeat px-6 pb-6 pt-56 sm:px-8 sm:pb-8 sm:pt-64"
+                          key={_id}
+                          className="relative bg-cover bg-center bg-no-repeat px-4 pb-4 pt-56 sm:px-6 2xl:px-8 sm:pb-6 2xl:pb-8 sm:pt-64"
                           style={{ backgroundImage: `url(${image})` }}
                       >
                           <span className="absolute inset-0 bg-gray-900/25"></span>
@@ -28,7 +29,7 @@ const Advantage = () => {
                           <div className="relative text-center">
                               <h3 className="text-2xl font-bold uppercase tracking-wider text-white sm:text-3xl">
                                   Save
-                                  <span className="relative inline-block before:absolute before:inset-x-0 before:bottom-0.5 before:h-2 before:bg-primary mx-4">
+                                  <span className="relative inline-block before:absolute before:inset-x-0 before:bottom-0.5 before:h-2 before:bg-primary mx-2 2xl:mx-4">
                                       <span className="relative"> 10% </span>
                                   </span>
                                   on Teles

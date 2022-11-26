@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import React from "react";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import Advantage from "../Components/Advantage";
 import Hero from "../Components/Hero";
 import ServiceCard from "../Components/ServiceCard";
 
 const Home = () => {
-    const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        fetch("https://ebay-server.vercel.app/categories")
-            .then((res) => res.json())
-            .then((data) => {
-                setCategories(data);
-                setLoading(false);
-            });
-    }, []);
+    const { isLoading, data } = useQuery("todos", () => {
+        return axios.get("https://ebay-server.vercel.app/categories");
+    });
 
     return (
         <>
@@ -23,10 +17,10 @@ const Home = () => {
             <Advantage />
             <section className="my-container section-gap">
                 <h1 className="text-center mb-4">Our Products</h1>
-                <ul className={`flex flex-wrap gap-2 justify-center ${loading ? "animate-pulse" : ""}`}>
-                    {loading
+                <ul className={`flex flex-wrap gap-2 justify-center ${isLoading ? "animate-pulse" : ""}`}>
+                    {isLoading
                         ? [...Array(4)].map((name, index) => <div key={index} className="w-28 h-12 bg-base-content/10"></div>)
-                        : categories.map((category, index) => (
+                        : data?.data.map((category, index) => (
                               <Link to={`/category/${category}`} className="btn btn-ghost" key={index}>
                                   {category}
                               </Link>

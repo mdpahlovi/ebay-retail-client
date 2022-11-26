@@ -1,6 +1,8 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { HashLoader } from "react-spinners";
+import { toast } from "react-toastify";
 import Header from "../Components/Header";
 import ProductCard from "../Components/ProductCard";
 
@@ -8,17 +10,17 @@ const CategoryProduct = () => {
     const { category } = useParams();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const categoryName = category[0].toUpperCase() + category.substring(1);
 
     useEffect(() => {
-        fetch(`https://ebay-server.vercel.app/category/${category}`)
-            .then((res) => res.json())
-            .then((data) => {
+        axios
+            .get(`https://ebay-server.vercel.app/category/${category}`)
+            .then(({ data }) => {
                 setProducts(data);
                 setLoading(false);
-            });
+            })
+            .catch((error) => toast.error(error.message));
     }, [category]);
-
-    const categoryName = category[0].toUpperCase() + category.substring(1);
 
     if (loading) {
         return (
