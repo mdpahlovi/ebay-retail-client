@@ -44,6 +44,19 @@ export const bookProduct = async (id, product) => {
         },
         body: JSON.stringify(product),
     });
-    const productData = await response.json();
-    return productData;
+    const message = await response.json();
+    return message;
+};
+
+export const verifiyUserProducts = async (email, product) => {
+    const response = await fetch(`http://localhost:5000/products/${email}`, {
+        method: "PATCH",
+        headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("ebay-token")}`,
+        },
+        body: JSON.stringify(product),
+    });
+    const message = await response.json();
+    return message;
 };

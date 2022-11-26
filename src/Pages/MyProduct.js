@@ -44,7 +44,7 @@ const MyProduct = () => {
                 </thead>
                 <tbody>
                     {loading || productsLoading ? (
-                        <TableLoader />
+                        <TableLoader field={2} btn={3} />
                     ) : (
                         products.map(({ _id, name, resale_price, status, advertised }, index) => (
                             <tr key={_id}>

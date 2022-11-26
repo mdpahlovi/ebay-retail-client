@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Advantage from "../Components/Advantage";
 import Hero from "../Components/Hero";
 import ServiceCard from "../Components/ServiceCard";
 
@@ -19,6 +20,7 @@ const Home = () => {
     return (
         <>
             <Hero />
+            <Advantage />
             <section className="my-container section-gap">
                 <h1 className="text-center mb-4">Our Products</h1>
                 <ul className={`flex flex-wrap gap-2 justify-center ${loading ? "animate-pulse" : ""}`}>
@@ -35,12 +37,12 @@ const Home = () => {
                 <div className="space-y-4">
                     <h1>Why should you trust our services?</h1>
                     <p className="pb-2">
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque rem aperiam, eaque ipsa quae. Sed ut unde omnis
-                        iste natus.
+                        Choose from over 4,500 items that can be delivered to your doorstep. Order online and enjoy our Buyer Protection program, which means
+                        that we’ll replace the item for FREE if it’s not as described in the ad!
                     </p>
                     <div className="flex items-center gap-6">
                         <button type="submit" className="btn btn-primary">
-                            Get started
+                            Contact Us
                         </button>
                         <Link aria-label="" className="btn btn-outline btn-primary">
                             Learn more
@@ -48,10 +50,10 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="grid gap-5 sm:grid-cols-2">
-                    <ServiceCard />
-                    <ServiceCard />
-                    <ServiceCard />
-                    <ServiceCard />
+                    <ServiceCard stats="100" statsTitle="Customer Review" />
+                    <ServiceCard stats="50" statsTitle="Product Selled" />
+                    <ServiceCard stats="60" statsTitle="Total Seller" />
+                    <ServiceCard stats="20" statsTitle="Daily Customer" />
                 </div>
             </section>
         </>

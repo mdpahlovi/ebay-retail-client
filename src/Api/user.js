@@ -58,3 +58,16 @@ export const deleteUser = async (email) => {
     const message = await response.json();
     return message;
 };
+
+export const verifiyUser = async (email, product) => {
+    const response = await fetch(`http://localhost:5000/user/${email}`, {
+        method: "PATCH",
+        headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("ebay-token")}`,
+        },
+        body: JSON.stringify(product),
+    });
+    const message = await response.json();
+    return message;
+};

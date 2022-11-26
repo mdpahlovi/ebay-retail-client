@@ -10,7 +10,7 @@ const Main = () => {
         <>
             <Navbar />
             <Outlet />
-            <footer className="px-4 divide-y shadow-md">
+            <footer className="px-4 divide-y shadow-md border-t border-base-content/10">
                 <div className="my-container flex flex-col justify-between py-10 space-y-8 lg:flex-row lg:space-y-0">
                     <div className="lg:w-1/3">
                         <Link className="flex justify-center space-x-3 lg:justify-start">

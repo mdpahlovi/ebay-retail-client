@@ -41,7 +41,7 @@ const AllBuyer = () => {
                 </thead>
                 <tbody>
                     {loading ? (
-                        <TableLoader />
+                        <TableLoader img={1} field={1} btn={2} />
                     ) : (
                         buyers.map(({ _id, avatar, name, role, email }, index) => (
                             <tr key={_id}>

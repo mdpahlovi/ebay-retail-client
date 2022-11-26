@@ -6,24 +6,17 @@ const Hero = () => {
         <section className="my-container section-gap grid grid-col-1 md:grid-cols-2 gap-10">
             <div className="flex flex-col md:justify-center space-y-4">
                 <h1>
-                    Kickstart <br />
-                    Startup Website <br />
-                    with TailGrids.
+                    Sell Your <br />
+                    Used Product !<br />
+                    We here to help you .
                 </h1>
                 <p className="max-w-xl lg:max-w-[480px] pb-2">
-                    With TailGrids, business and students thrive together. Business can perfectly match their staffing to changing demand throughout the dayed.
+                    Ebay-Retail is bangladesh one of the best reseller website. Here you can buy & sell your used product. Get supper deal by connect your
+                    seller.
                 </p>
                 <div className="flex flex-wrap items-center gap-5">
                     <Link className="btn btn-primary w-full xs:w-auto">Get Start</Link>
-                    <Link className="btn btn-outline btn-primary w-full xs:w-auto">Download Now</Link>
-                </div>
-                <div className="hidden lg:block">
-                    <h6 className="font-normal opacity-50 mb-4">Some of Our Clients</h6>
-                    <div className="flex items-center gap-8 max-w-lg">
-                        <img className="w-full" src="https://cdn.tailgrids.com/1.0/assets/images/brands/ayroui.svg" alt="ayroui" />
-                        <img className="w-full" src="https://cdn.tailgrids.com/1.0/assets/images/brands/graygrids.svg" alt="graygrids" />
-                        <img className="w-full" src="https://cdn.tailgrids.com/1.0/assets/images/brands/uideck.svg" alt="uideck" />
-                    </div>
+                    <Link className="btn btn-outline btn-primary w-full xs:w-auto">Become Seller</Link>
                 </div>
             </div>
             <div className="lg:text-right mx-auto lg:ml-auto lg:mr-0 pb-6">
@@ -58,14 +51,6 @@ const Hero = () => {
                             <circle cx="90.5" cy="90.5" r="2.5" fill="#F48E00" />
                         </svg>
                     </span>
-                </div>
-            </div>
-            <div className="lg:hidden col-span-full -mt-4">
-                <h6 className="font-normal text-sm text-center mb-4">Some Of Our Clients</h6>
-                <div className="flex items-center gap-8 max-w-lg mx-auto">
-                    <img className="w-full" src="https://cdn.tailgrids.com/1.0/assets/images/brands/ayroui.svg" alt="ayroui" />
-                    <img className="w-full" src="https://cdn.tailgrids.com/1.0/assets/images/brands/graygrids.svg" alt="graygrids" />
-                    <img className="w-full" src="https://cdn.tailgrids.com/1.0/assets/images/brands/uideck.svg" alt="uideck" />
                 </div>
             </div>
         </section>

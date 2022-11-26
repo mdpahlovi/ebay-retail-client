@@ -22,7 +22,7 @@ const Navbar = () => {
     } lg:opacity-100 lg:translate-x-0`;
 
     return (
-        <nav className="sticky bg-base-100 top-0 z-20 shadow-md">
+        <nav className="sticky bg-base-100 top-0 z-20 border-b border-base-content/10">
             <div className="my-container h-16 lg:h-20 flex justify-between items-center">
                 <Link to="/">
                     <img className="w-40 lg:w-48" src={theme === "dark" ? DarkLogo : LightLogo} alt="" />
