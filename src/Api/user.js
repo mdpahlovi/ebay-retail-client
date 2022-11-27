@@ -54,6 +54,10 @@ export const getAllSeller = async () => {
 export const deleteUser = async (email) => {
     const response = await fetch(`https://ebay-server.vercel.app/user/${email}`, {
         method: "DELETE",
+        headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("ebay-token")}`,
+        },
     });
     const message = await response.json();
     return message;

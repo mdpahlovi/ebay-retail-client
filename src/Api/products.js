@@ -25,16 +25,20 @@ export const getUserProducts = async (email) => {
     return products;
 };
 
-// Delete User By Email
+// Delete User Product By Id
 export const deleteProduct = async (id) => {
     const response = await fetch(`https://ebay-server.vercel.app/product/${id}`, {
         method: "DELETE",
+        headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("ebay-token")}`,
+        },
     });
     const message = await response.json();
     return message;
 };
 
-// Update Product
+// Book & Update Product
 export const bookProduct = async (id, product) => {
     const response = await fetch(`https://ebay-server.vercel.app/product/${id}`, {
         method: "PATCH",

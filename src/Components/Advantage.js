@@ -6,7 +6,13 @@ const Advantage = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("https://ebay-server.vercel.app/adverties-product")
+        fetch("https://ebay-server.vercel.app/adverties-product", {
+            method: "GET",
+            headers: {
+                "content-type": "application/json",
+                authorization: `Bearer ${localStorage.getItem("ebay-token")}`,
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
                 setAdvertiesProduct(data);
