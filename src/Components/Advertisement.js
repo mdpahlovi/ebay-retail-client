@@ -1,30 +1,23 @@
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import React from "react";
 import { Link } from "react-router-dom";
 
-const Advantage = () => {
-    const [advertiesProduct, setAdvertiesProduct] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        fetch("https://ebay-server.vercel.app/adverties-product", {
-            method: "GET",
-            headers: {
-                "content-type": "application/json",
-                authorization: `Bearer ${localStorage.getItem("ebay-token")}`,
-            },
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setAdvertiesProduct(data);
-                setLoading(false);
-            });
-    }, []);
+const Advertisement = () => {
+    const { isLoading, data } = useQuery({
+        queryKey: ["Advertisements"],
+        queryFn: () => {
+            return axios.get("https://ebay-server.vercel.app/adverties-product");
+        },
+    });
 
     return (
-        <section className="my-container section-gap grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center gap-8">
-            {loading
-                ? ""
-                : advertiesProduct.map(({ _id, category, image, condition, name }) => (
+        <section className={`my-container section-gap grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center gap-8 ${isLoading ? "animate-pulse" : ""}`}>
+            {isLoading
+                ? [...Array(3)].map((name, index) => (
+                      <div key={index} className="bg-base-content/10 px-4 pb-4 pt-56 sm:px-6 2xl:px-8 sm:pb-6 2xl:pb-8 sm:pt-64"></div>
+                  ))
+                : data.data.map(({ _id, category, image, condition, name }) => (
                       <div
                           key={_id}
                           className="relative bg-cover bg-center bg-no-repeat px-4 pb-4 pt-56 sm:px-6 2xl:px-8 sm:pb-6 2xl:pb-8 sm:pt-64"
@@ -51,4 +44,4 @@ const Advantage = () => {
     );
 };
 
-export default Advantage;
+export default Advertisement;

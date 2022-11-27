@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
-import Advantage from "../Components/Advantage";
+import Advertisement from "../Components/Advertisement";
 import Hero from "../Components/Hero";
 import ServiceCard from "../Components/ServiceCard";
 
@@ -17,7 +17,7 @@ const Home = () => {
     return (
         <>
             <Hero />
-            <Advantage />
+            <Advertisement />
             <section className="my-container section-gap">
                 <h1 className="text-center mb-4">Our Products</h1>
                 <ul className={`flex flex-wrap gap-2 justify-center ${isLoading ? "animate-pulse" : ""}`}>
