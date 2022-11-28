@@ -35,7 +35,7 @@ const AddProduct = () => {
         const phone = form.phone.value;
         const resale_price = form.resale_price.value;
         const original_price = form.original_price.value;
-        const used_year = form.used_year.value;
+        const purchase_date = new Date(form.purchase_date.value);
         const condition = form.condition.value;
         const description = form.description.value;
         const date = new Date();
@@ -50,7 +50,7 @@ const AddProduct = () => {
                 location,
                 resale_price,
                 original_price,
-                used_year,
+                purchase_date,
                 condition,
                 description,
                 date,
@@ -88,6 +88,18 @@ const AddProduct = () => {
         }
     };
 
+    const dateChange = (event) => {
+        const date_input = event.target;
+        const label = event.target.nextSibling;
+        if (date_input.value) {
+            date_input.classList.add("opacity-100");
+            label.classList.add("hidden");
+        } else {
+            date_input.classList.remove("opacity-100");
+            label.classList.remove("hidden");
+        }
+    };
+
     return (
         <form onSubmit={handelSubmit} className="max-w-screen-xs sm:max-w-screen-sm mx-auto px-6 section-gap space-y-5">
             <div className="grid sm:grid-cols-[4fr_8fr] gap-5">
@@ -104,7 +116,10 @@ const AddProduct = () => {
                 <Input type={"number"} name={"original_price"} text={"Original Price"} />
             </div>
             <div className="grid sm:grid-cols-2 gap-5">
-                <Input type={"number"} name={"used_year"} text={"Used Year"} />
+                <div className="relative">
+                    <input onChange={dateChange} type="date" name="purchase_date" className="opacity-0 absolute z-10 input w-full border-primary" />
+                    <Input type={"text"} text={"Purchase Date"} />
+                </div>
                 <Input type={"text"} name={"condition"} text={"Condition"} />
             </div>
             <Input type={"text"} name={"description"} text={"Description"} />

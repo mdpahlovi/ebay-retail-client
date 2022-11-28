@@ -6,8 +6,9 @@ import BookModal from "./BookModal";
 import { AuthContext } from "../Contexts/UserContext";
 import { toast } from "react-toastify";
 import { bookProduct } from "../Api/products";
+import { formatDistance } from "date-fns";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, refresh, setRefresh }) => {
     const {
         _id,
         name,
@@ -15,15 +16,18 @@ const ProductCard = ({ product }) => {
         location,
         resale_price,
         original_price,
-        used_year,
+        purchase_date,
         description,
         condition,
         date,
+        status,
         seller_name,
         seller_email,
         seller_avatar,
         verification,
     } = product;
+
+    const used_year = formatDistance(parseISO(date), parseISO(purchase_date));
     const dateIs = format(parseISO(date), "PP");
     const timeIs = format(parseISO(date), "p");
     const { user } = useContext(AuthContext);
@@ -47,7 +51,10 @@ const ProductCard = ({ product }) => {
             const status = "booked";
             const product = { meet_location, buyer_phone, status, buyer_name, buyer_email, buyer_avatar };
             bookProduct(productId, product)
-                .then(({ message }) => toast.success(`${message} The ${name}`))
+                .then(({ message }) => {
+                    toast.success(`${message} The ${name}`);
+                    setRefresh(!refresh);
+                })
                 .catch(({ message }) => toast.error(message));
         }
     };
@@ -72,7 +79,7 @@ const ProductCard = ({ product }) => {
                 <div className="text-lg font-semibold">Location : {location}</div>
                 <div className="text-sm text-base-content/50 flex flex-col gap-1">
                     <span>Original Price : ${original_price}</span>
-                    <span>Used : {used_year} Year</span>
+                    <span>Used : {used_year}</span>
                 </div>
                 <div className="h-1.5 w-full"></div>
                 <div className="flex-auto flex flex-wrap justify-between items-center gap-4">
@@ -93,6 +100,7 @@ const ProductCard = ({ product }) => {
                         }}
                         className="btn btn-sm btn-primary"
                         type="submit"
+                        disabled={status ? true : false}
                     >
                         Book Now
                     </button>
