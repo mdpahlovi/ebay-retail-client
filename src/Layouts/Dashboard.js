@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../Contexts/UserContext";
-import { getRole } from "../Api/user";
-import DashboardMenu from "../Components/DashBoardMenu";
+import { getCurrentUser } from "../Api/user";
+import DashboardMenu from "./Components/DashBoardMenu";
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
@@ -11,8 +11,8 @@ const Dashboard = () => {
     const { displayName, photoURL } = user;
 
     useEffect(() => {
-        getRole(user?.email).then((data) => {
-            setRole(data);
+        getCurrentUser(user?.email).then((data) => {
+            setRole(data.role);
             setLoading(false);
         });
     }, [user]);

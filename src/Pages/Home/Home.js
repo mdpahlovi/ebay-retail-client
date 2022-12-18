@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
-import Advertisement from "../Components/Advertisement";
-import Hero from "../Components/Hero";
-import ServiceCard from "../Components/ServiceCard";
+import Advertisement from "./Components/Advertisement";
+import Hero from "./Components/Hero";
+import ServiceCard from "../../Components/ServiceCard";
 
 const Home = () => {
     const { isLoading, data } = useQuery({

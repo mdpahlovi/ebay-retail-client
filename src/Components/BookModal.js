@@ -1,9 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-
 import Input from "./Input";
 
-export default function BookModal({ user, isOpen, setIsOpen, handeBook, name, price }) {
+export default function BookModal({ user, isOpen, setIsOpen, handelBooking, name, price }) {
     const { displayName, email, photoURL } = user;
 
     return (
@@ -33,7 +32,7 @@ export default function BookModal({ user, isOpen, setIsOpen, handeBook, name, pr
                             leaveTo="opacity-0 scale-95"
                         >
                             <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-base-100 align-middle shadow-xl transition-all">
-                                <form onSubmit={handeBook} className="relative p-8 text-left">
+                                <form onSubmit={handelBooking} className="relative p-8 text-left">
                                     <div className="justify-between sm:flex items-center">
                                         <div>
                                             <h3 className="text-xl font-bold">{displayName}</h3>

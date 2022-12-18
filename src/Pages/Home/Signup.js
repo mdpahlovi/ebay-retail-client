@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../Contexts/UserContext";
-import Input from "../Components/Input";
-import Header from "../Components/Header";
+import { AuthContext } from "../../Contexts/UserContext";
+import Input from "../../Components/Input";
+import Header from "../../Components/Header";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { setAuthAndToken } from "../Api/auth";
-import { getImgUrl } from "../Api/getImgUrl";
+import { setAuthAndToken } from "../../Api/auth";
+import { getImgUrl } from "../../Api/getImgUrl";
 
 const Signup = () => {
     const { setLoading, createUser, updateUserProfile } = useContext(AuthContext);

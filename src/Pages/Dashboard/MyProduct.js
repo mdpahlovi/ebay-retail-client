@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { deleteProduct, getUserProducts, bookProduct } from "../Api/products";
-import TableLoader from "../Components/TableLoader";
-import { AuthContext } from "../Contexts/UserContext";
+import { deleteProduct, getUserProducts, bookProduct } from "../../Api/products";
+import TableLoader from "../../Components/TableLoader";
+import { AuthContext } from "../../Contexts/UserContext";
 
 const MyProduct = () => {
     const [products, setProducts] = useState([]);

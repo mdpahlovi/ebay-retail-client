@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { getImgUrl } from "../Api/getImgUrl";
-import { addProduct } from "../Api/products";
-import { getCorrentUser } from "../Api/user";
-import Input from "../Components/Input";
-import { AuthContext } from "../Contexts/UserContext";
+import { getImgUrl } from "../../Api/getImgUrl";
+import { addProduct } from "../../Api/products";
+import { getCurrentUser } from "../../Api/user";
+import Input from "../../Components/Input";
+import { AuthContext } from "../../Contexts/UserContext";
 
 const AddProduct = () => {
     const { user, loading } = useContext(AuthContext);
@@ -16,7 +16,7 @@ const AddProduct = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        getCorrentUser(user?.email)
+        getCurrentUser(user?.email)
             .then((res) => {
                 setCorrentUser(res);
                 setUserLoading(false);

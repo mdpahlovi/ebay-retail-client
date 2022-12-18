@@ -31,7 +31,7 @@ const Advertisement = () => {
                                   <span className="relative inline-block before:absolute before:inset-x-0 before:bottom-0.5 before:h-2 before:bg-primary mx-2 2xl:mx-4">
                                       <span className="relative"> 10% </span>
                                   </span>
-                                  on Teles
+                                  on Sales
                               </h3>
                               <p className="mt-1 text-white/95">{name}</p>
                               <Link to={`/category/${category}`} className="btn btn-primary w-full mt-4">

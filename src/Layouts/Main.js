@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import Navbar from "../Components/Navbar";
+import Navbar from "./Components/Navbar";
 import { BsFacebook, BsTwitter } from "react-icons/bs";
 import { RiInstagramFill } from "react-icons/ri";
 import Icon from "../Assets/logo/icon.png";

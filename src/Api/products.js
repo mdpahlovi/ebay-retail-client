@@ -1,66 +1,30 @@
+import { jwtAxios } from "./api";
+
 // Add a Product
 export const addProduct = async (product) => {
-    const response = await fetch(`https://ebay-server.vercel.app/products`, {
-        method: "POST",
-        headers: {
-            "content-type": "application/json",
-            authorization: `Bearer ${localStorage.getItem("ebay-token")}`,
-        },
-        body: JSON.stringify(product),
-    });
-    const data = await response.json();
-    return data;
+    const response = await jwtAxios.post("/products", product);
+    return response.data;
 };
 
 // Get Product By Email
 export const getUserProducts = async (email) => {
-    const response = await fetch(`https://ebay-server.vercel.app/products/${email}`, {
-        method: "GET",
-        headers: {
-            "content-type": "application/json",
-            authorization: `Bearer ${localStorage.getItem("ebay-token")}`,
-        },
-    });
-    const products = await response.json();
-    return products;
+    const response = await jwtAxios.get(`/products/${email}`);
+    return response.data;
 };
 
 // Delete User Product By Id
 export const deleteProduct = async (id) => {
-    const response = await fetch(`https://ebay-server.vercel.app/product/${id}`, {
-        method: "DELETE",
-        headers: {
-            "content-type": "application/json",
-            authorization: `Bearer ${localStorage.getItem("ebay-token")}`,
-        },
-    });
-    const message = await response.json();
-    return message;
+    const response = await jwtAxios.delete(`/product/${id}`);
+    return response.data;
 };
 
 // Book & Update Product
 export const bookProduct = async (id, product) => {
-    const response = await fetch(`https://ebay-server.vercel.app/product/${id}`, {
-        method: "PATCH",
-        headers: {
-            "content-type": "application/json",
-            authorization: `Bearer ${localStorage.getItem("ebay-token")}`,
-        },
-        body: JSON.stringify(product),
-    });
-    const message = await response.json();
-    return message;
+    const response = await jwtAxios.patch(`/product/${id}`, product);
+    return response.data;
 };
 
-export const verifiyUserProducts = async (email, product) => {
-    const response = await fetch(`https://ebay-server.vercel.app/products/${email}`, {
-        method: "PATCH",
-        headers: {
-            "content-type": "application/json",
-            authorization: `Bearer ${localStorage.getItem("ebay-token")}`,
-        },
-        body: JSON.stringify(product),
-    });
-    const message = await response.json();
-    return message;
+export const verifyUserProducts = async (email, product) => {
+    const response = await jwtAxios.patch(`/products/${email}`, product);
+    return response.data;
 };

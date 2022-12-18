@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { apiUrl } from "./api";
 
 export const setAuthAndToken = (user, role, name, img) => {
     const currentUser = { email: user.email, role: role };
@@ -12,7 +13,7 @@ export const setAuthAndToken = (user, role, name, img) => {
     }
 
     axios
-        .put(`https://ebay-server.vercel.app/user/${user?.email}`, currentUser)
+        .put(`${apiUrl}/user/${user?.email}`, currentUser)
         .then(({ data }) => localStorage.setItem("ebay-token", data.token))
         .catch(({ message }) => toast.error(message));
 };

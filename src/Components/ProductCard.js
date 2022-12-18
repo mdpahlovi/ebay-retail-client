@@ -34,7 +34,7 @@ const ProductCard = ({ product, refresh, setRefresh }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [productId, setProductId] = useState(null);
-    const handeBook = (event) => {
+    const handelBooking = (event) => {
         event.preventDefault();
         const form = event.target;
         const meet_location = form.meet_location.value;
@@ -104,7 +104,7 @@ const ProductCard = ({ product, refresh, setRefresh }) => {
                     >
                         Book Now
                     </button>
-                    <BookModal user={user} isOpen={isOpen} setIsOpen={setIsOpen} handeBook={handeBook} name={name} price={resale_price} />
+                    <BookModal user={user} isOpen={isOpen} setIsOpen={setIsOpen} handelBooking={handelBooking} name={name} price={resale_price} />
                 </div>
             </div>
         </div>

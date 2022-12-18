@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../Components/Header";
-import BlogCard from "../Components/BlogCard";
+import Header from "../../Components/Header";
+import BlogCard from "../../Components/BlogCard";
 import { HashLoader } from "react-spinners";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";

@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { CgMenuRight, CgClose } from "react-icons/cg";
 import { SiSlideshare } from "react-icons/si";
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from "../../Components/ThemeToggle";
 import AuthDropDown from "./AuthDropDown";
-import { AuthContext } from "../Contexts/UserContext";
-import LightLogo from "../Assets/logo/light-logo.png";
-import DarkLogo from "../Assets/logo/dark-logo.png";
+import { AuthContext } from "../../Contexts/UserContext";
+import LightLogo from "../../Assets/logo/light-logo.png";
+import DarkLogo from "../../Assets/logo/dark-logo.png";
 
 const Navbar = () => {
     const { theme } = useContext(AuthContext);

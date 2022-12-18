@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { HashLoader } from "react-spinners";
-import Header from "../Components/Header";
-import ProductCard from "../Components/ProductCard";
+import Header from "../../Components/Header";
+import ProductCard from "../../Components/ProductCard";
 
 const CategoryProduct = () => {
     const { category } = useParams();

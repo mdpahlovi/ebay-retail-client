@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { HashLoader } from "react-spinners";
-import { getRole } from "../Api/user";
+import { getCurrentUser } from "../Api/user";
 import { AuthContext } from "../Contexts/UserContext";
 
 const AdminRoute = ({ children }) => {
@@ -10,8 +10,8 @@ const AdminRoute = ({ children }) => {
     const [roleLoading, setRoleLoading] = useState(true);
     useEffect(() => {
         setRoleLoading(true);
-        getRole(user?.email).then((data) => {
-            setRole(data);
+        getCurrentUser(user?.email).then((data) => {
+            setRole(data.role);
             setRoleLoading(false);
         });
     }, [user]);

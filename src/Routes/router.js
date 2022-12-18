@@ -1,20 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layouts/Main";
 import Dashboard from "../Layouts/Dashboard";
-import Home from "../Pages/Home";
-import Signin from "../Pages/Signin";
-import Signup from "../Pages/Signup";
-import ErrorPage from "../Pages/ErrorPage";
-import Blogs from "../Pages/Blogs";
-import DeshboardHome from "../Pages/DeshboardHome";
+import Home from "../Pages/Home/Home";
+import CategoryProduct from "../Pages/Home/CategoryProduct";
+import Blogs from "../Pages/Home/Blogs";
+import Signin from "../Pages/Home/Signin";
+import Signup from "../Pages/Home/Signup";
+import DashboardHome from "../Pages/Dashboard/DashboardHome";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
-import AllBuyer from "../Pages/AllBuyer";
-import AllSeller from "../Pages/AllSeller";
-import AddProduct from "../Pages/AddProduct";
+import AllBuyer from "../Pages/Dashboard/AllBuyer";
+import AllSeller from "../Pages/Dashboard/AllSeller";
+import AddProduct from "../Pages/Dashboard/AddProduct";
 import SellerRoute from "./SellerRoute";
-import MyProduct from "../Pages/MyProduct";
-import CategoryProduct from "../Pages/CategoryProduct";
+import MyProduct from "../Pages/Dashboard/MyProduct";
+import ErrorPage from "../Pages/ErrorPage";
 
 const router = createBrowserRouter([
     {
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: "/dashboard",
-                        element: <DeshboardHome />,
+                        element: <DashboardHome />,
                     },
                     {
                         path: "all-buyer",

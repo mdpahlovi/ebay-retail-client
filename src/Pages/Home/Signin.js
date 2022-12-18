@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../Contexts/UserContext";
-import Input from "../Components/Input";
-import Header from "../Components/Header";
+import { AuthContext } from "../../Contexts/UserContext";
+import Input from "../../Components/Input";
+import Header from "../../Components/Header";
 import { ImGoogle, ImGithub } from "react-icons/im";
 import { BsFacebook } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { setAuthAndToken } from "../Api/auth";
+import { setAuthAndToken } from "../../Api/auth";
 
 const Signin = () => {
     const { setLoading, signIn, signInByGoogle, signInByFacebook, signInByGithub } = useContext(AuthContext);

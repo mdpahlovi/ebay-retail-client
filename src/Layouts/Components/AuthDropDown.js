@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
-import { AuthContext } from "../Contexts/UserContext";
+import { AuthContext } from "../../Contexts/UserContext";
 
 const AuthDropDown = ({ className }) => {
     const { theme, user, loading, signout } = useContext(AuthContext);

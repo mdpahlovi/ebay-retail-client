@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { deleteUser, getAllBuyer } from "../Api/user";
-import TableLoader from "../Components/TableLoader";
+import { verifyUserProducts } from "../../Api/products";
+import { deleteUser, getAllSeller, verifyUser } from "../../Api/user";
+import TableLoader from "../../Components/TableLoader";
 
-const AllBuyer = () => {
-    const [buyers, setBuyers] = useState([]);
+const AllSeller = () => {
+    const [sellers, setSellers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
         setLoading(true);
-        getAllBuyer()
+        getAllSeller()
             .then((res) => {
-                setBuyers(res);
+                setSellers(res);
                 setLoading(false);
             })
             .catch(({ message }) => toast.error(message));
@@ -21,8 +22,21 @@ const AllBuyer = () => {
     const handelDelete = (email) => {
         deleteUser(email)
             .then(({ message }) => {
-                toast.success(`${message} Buyer`);
+                toast.success(`${message} Seller`);
                 setRefresh(!refresh);
+            })
+            .catch(({ message }) => toast.error(message));
+    };
+
+    const handelVerifiy = (email) => {
+        verifyUser(email, { verification: true })
+            .then((res) => {
+                verifyUserProducts(email, { verification: true })
+                    .then(({ message }) => {
+                        toast.success(message);
+                        setRefresh(!refresh);
+                    })
+                    .catch(({ message }) => toast.error(message));
             })
             .catch(({ message }) => toast.error(message));
     };
@@ -36,14 +50,15 @@ const AllBuyer = () => {
                         <th>Profile</th>
                         <th>Name</th>
                         <th>Role</th>
-                        <th>Delete Buyer</th>
+                        <th>Verification</th>
+                        <th>Delete Seller</th>
                     </tr>
                 </thead>
                 <tbody>
                     {loading ? (
-                        <TableLoader img={1} field={1} btn={2} />
+                        <TableLoader img={1} field={1} btn={3} />
                     ) : (
-                        buyers.map(({ _id, avatar, name, role, email }, index) => (
+                        sellers.map(({ _id, avatar, name, role, email, verification }, index) => (
                             <tr key={_id}>
                                 <th>{index + 1}</th>
                                 <td>
@@ -54,6 +69,11 @@ const AllBuyer = () => {
                                 <td>{name}</td>
                                 <td>
                                     <button className="btn btn-sm btn-primary">{role}</button>
+                                </td>
+                                <td>
+                                    <button onClick={() => handelVerifiy(email)} className="btn btn-sm btn-primary" disabled={verification ? true : false}>
+                                        {verification ? "Verified" : "UnVerified"}
+                                    </button>
                                 </td>
                                 <td>
                                     <button onClick={() => handelDelete(email)} className="btn btn-sm btn-error">
@@ -69,4 +89,4 @@ const AllBuyer = () => {
     );
 };
 
-export default AllBuyer;
+export default AllSeller;
