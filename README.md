@@ -6,12 +6,12 @@
 
 #### What can you get here?
 
--   Website including with 3 role Admin, Buyer & Seller.
+-   Website including Dashboard panel with three different role for use like Admin, Buyer & Seller.
 -   Admin See & delete All Buyer & Seller.
 -   Seller can add product, see & delete his product.
 -   Buyer can book product & see his booking.
 -   Firebase Authentication Email & Password Base & Google.
--   Swich Light & Dark Mode.
+-   Switch Light & Dark Mode.
 
 adminEmail: mdpahlovi07@gmail.com
 adminPassword: 12345678
